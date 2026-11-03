@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <meta name="theme-color" content="#070a0c" />
+    <meta
+      name="description"
+      content="OPERATION: BLACKOUT — a top-down tactical military shooter. Task Force 09 against the Black Veil."
+    />
+    <title>OPERATION: BLACKOUT</title>
+    <style>
+      :root {
+        color-scheme: dark;
+        --ink: #070a0c;
+        --sand: #c9b389;
+        --amber: #e3a84b;
+        --signal: #7fd8b2;
+      }
+      * { box-sizing: border-box; }
+      html, body {
+        margin: 0;
+        padding: 0;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: #050708;
+        color: #d8d4c8;
+        font-family: "Bahnschrift", "DIN Alternate", "Segoe UI", Arial, sans-serif;
+      }
+      #game {
+        position: fixed;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background:
+          radial-gradient(circle at 50% 45%, #121a1c 0%, #070a0c 55%, #030405 100%);
+      }
+      #game canvas {
+        display: block;
+        image-rendering: auto;
+        box-shadow: 0 0 80px rgba(0, 0, 0, 0.9);
+      }
+      #boot-screen {
+        position: fixed;
+        inset: 0;
+        z-index: 20;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 18px;
+        background: #050708;
+        transition: opacity 0.45s ease;
+        letter-spacing: 0.28em;
+      }
+      #boot-screen.hidden { opacity: 0; pointer-events: none; }
+      #boot-screen .mark {
+        width: 84px;
+        height: 84px;
+        border: 1px solid rgba(201, 179, 137, 0.55);
+        transform: rotate(45deg);
+        position: relative;
+      }
+      #boot-screen .mark::after {
+        content: "";
+        position: absolute;
+        inset: 13px;
+        border: 1px solid rgba(227, 168, 75, 0.85);
+      }
+      #boot-screen h1 {
+        font-size: 22px;
+        font-weight: 600;
+        margin: 12px 0 0;
+        color: #e7e0d1;
+      }
+      #boot-screen p {
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 11px;
+        color: #8b918b;
+        letter-spacing: 0.2em;
+        margin: 0;
+      }
+      #boot-screen .bar {
+        width: 280px;
+        height: 2px;
+        background: #1d2426;
+        overflow: hidden;
+      }
+      #boot-screen .bar span {
+        display: block;
+        width: 40%;
+        height: 100%;
+        background: var(--sand);
+        animation: sweep 1.1s ease-in-out infinite;
+      }
+      @keyframes sweep {
+        0% { transform: translateX(-120%); }
+        100% { transform: translateX(360%); }
+      }
+      #fatal {
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 40px;
+        background: #050708;
+        font-family: Consolas, monospace;
+        color: #ff8f7a;
+        white-space: pre-wrap;
+        overflow: auto;
+      }
+      .webgl-warning {
+        position: fixed;
+        bottom: 14px;
+        left: 50%;
+        transform: translateX(-50%);
+        color: #a59d8c;
+        font: 11px Consolas, monospace;
+        letter-spacing: 0.12em;
+        opacity: 0.75;
+        z-index: 15;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="game"></div>
+    <div id="boot-screen">
+      <div class="mark"></div>
+      <h1>OPERATION: BLACKOUT</h1>
+      <p>TASK FORCE 09 // SECURE UPLINK</p>
+      <div class="bar"><span></span></div>
+      <p id="boot-status">INITIALIZING FIELD KIT</p>
+    </div>
+    <pre id="fatal"></pre>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>
